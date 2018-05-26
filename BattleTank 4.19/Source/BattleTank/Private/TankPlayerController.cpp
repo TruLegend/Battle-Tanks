@@ -1,24 +1,23 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright The Raw Studio.
 
 #include "BattleTank.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 #include "TankPlayerController.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank)
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	
+	if (AimingComponent)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController not possessing Tank"));
+		FoundAimingComponent(AimingComponent);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possessing Tank: %s"), *(ControlledTank->GetName()));
+		UE_LOG(LogTemp, Warning, TEXT("Player Controller can't find Aiming Component at BeginPlay"));
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController BeginPlay"));
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

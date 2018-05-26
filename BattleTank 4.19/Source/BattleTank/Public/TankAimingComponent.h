@@ -33,7 +33,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::RELOADING;
+	EFiringState FiringState = EFiringState::AIMING;
 
 private:
 	// Sets default values for this component's properties
