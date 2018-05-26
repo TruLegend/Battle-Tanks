@@ -29,7 +29,7 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) {return;} // If we don't have a barrel, get out.
-	if (!Turret) {return;} // If we don't have a barrel, get out.
+	if (!Turret) {return;} // If we don't have a turret, get out.
 
 	FVector OutLaunchVelocity; // Out parameter
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile")); // Start location
