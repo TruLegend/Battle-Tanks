@@ -19,7 +19,7 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 		ATank* GetControlledTank() const;
 
 private:
