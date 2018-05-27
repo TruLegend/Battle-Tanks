@@ -4,9 +4,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-// Forward Declaration
-class UTankAimingComponent;
-
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
@@ -23,5 +20,5 @@ private:
 	float AcceptanceRadius = 3000;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 6000;
+	float LaunchSpeed = 6000;
 };
