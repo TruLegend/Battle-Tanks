@@ -20,7 +20,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) {return;} // If we don't have a barrel, get out.
 	if (!ensure(Turret)) {return;} // If we don't have a turret, get out.
@@ -51,8 +51,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	if (!ensure(Barrel || Turret)) { return; }
-
-	UE_LOG(LogTemp, Warning, TEXT("AimAt called"));
 
 	// Work out the differnce between the current barrel location and AimDirection
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();

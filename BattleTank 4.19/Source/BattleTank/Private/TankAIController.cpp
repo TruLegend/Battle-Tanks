@@ -1,7 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright The Raw Studio.
 
 #include "BattleTank.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.h"
 
 
@@ -15,20 +15,19 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!ensure(PlayerPawn)) { return; }
+	auto ControlledTank = GetPawn();
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	auto ControlledTank = Cast<ATank>(GetPawn());
-	auto PlayerTank = Cast<ATank>(PlayerPawn);
+	if (!ensure(PlayerTank && ControlledTank)) { return; }
 
-	if (ensure(PlayerTank))
-	{
-		// Move towards player
-		MoveToActor(PlayerTank, AcceptanceRadius);
+	// Move towards player
+	MoveToActor(PlayerTank, AcceptanceRadius);
 
-		// Aim towards the player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	// Aim towards the player
+	auto TankAimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+	TankAimingComponent->AimAt(PlayerTank->GetActorLocation());
 
-		ControlledTank->Fire(); // TODO: Don't fire every frame/limit fire rate
-	}
+	// TODO: Fix firing
+	//TankAimingComponent->Fire(); // TODO: Don't fire every frame/limit fire rate
+
 }

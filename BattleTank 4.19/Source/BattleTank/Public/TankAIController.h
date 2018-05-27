@@ -1,13 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Copyright The Raw Studio.
 #pragma once
-
 
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
 // Forward Declaration
-class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
@@ -23,4 +21,7 @@ private:
 
 	// How close can the AI tank get
 	float AcceptanceRadius = 3000;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 6000;
 };
