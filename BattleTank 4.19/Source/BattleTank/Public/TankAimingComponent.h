@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
 	RELOADING,
 	AIMING,
-	LOCKED
+	LOCKED,
+	EMPTY
 };
 
 // Forward Declarations
@@ -37,9 +38,15 @@ public:
 
 	EFiringState GetFiringState() const;
 
+	UFUNCTION(BlueprintCallable)
+	int GetAmmo() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::RELOADING;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+	int Ammo = 3;
 
 private:
 	// Sets default values for this component's properties

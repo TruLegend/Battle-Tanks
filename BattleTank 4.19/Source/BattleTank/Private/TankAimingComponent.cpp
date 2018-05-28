@@ -33,19 +33,28 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	// If out of ammo
+	if (Ammo <= 0)
+	{
+		Ammo = 0;
+		FiringState = EFiringState::EMPTY;
+	}
 	// If we have reloaded
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringState = EFiringState::RELOADING;
 	}
+	// If we are aiming
 	else if (IsBarrelMoving())
 	{
 		FiringState = EFiringState::AIMING;
 	}
+	// If we are locked
 	else
 	{
 		FiringState = EFiringState::LOCKED;
 	}
+
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
@@ -78,7 +87,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 
 void UTankAimingComponent::Fire()
 {
-	if (FiringState != EFiringState::RELOADING)
+	// If not reloading, then fire
+	if (FiringState == EFiringState::AIMING || FiringState == EFiringState::LOCKED)
 	{
 		if (!ensure(Barrel)) { return; }
 		if (!ensure(ProjectileBlueprint)) { return; }
@@ -91,12 +101,23 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		Ammo -= 1;
+	}
+	// If ammunition is empty OR If we are reloading
+	else if (FiringState == EFiringState::RELOADING || FiringState == EFiringState::EMPTY)
+	{
+		// Don't fire
 	}
 }
 
 EFiringState UTankAimingComponent::GetFiringState() const
 {
 	return FiringState;
+}
+
+int UTankAimingComponent::GetAmmo() const
+{
+	return Ammo;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
