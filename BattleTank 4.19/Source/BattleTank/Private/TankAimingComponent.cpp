@@ -41,14 +41,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	else if (IsBarrelMoving())
 	{
 		FiringState = EFiringState::AIMING;
-		UE_LOG(LogTemp, Warning, TEXT("Aiming"));
 	}
 	else
 	{
 		FiringState = EFiringState::LOCKED;
-		UE_LOG(LogTemp, Warning, TEXT("Locked"));
 	}
-	// TODO: Handle aiming and locked states
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation)
