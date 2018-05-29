@@ -101,12 +101,7 @@ void UTankAimingComponent::Fire()
 
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
-		Ammo -= 1;
-	}
-	// If ammunition is empty OR If we are reloading
-	else if (FiringState == EFiringState::RELOADING || FiringState == EFiringState::EMPTY)
-	{
-		// Don't fire
+		Ammo--;
 	}
 }
 
@@ -115,7 +110,7 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
-int UTankAimingComponent::GetAmmo() const
+int32 UTankAimingComponent::GetAmmo() const
 {
 	return Ammo;
 }

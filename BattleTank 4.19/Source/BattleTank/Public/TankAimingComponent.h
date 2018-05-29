@@ -39,14 +39,14 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable)
-	int GetAmmo() const;
+	int32 GetAmmo() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::RELOADING;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Setup")
-	int Ammo = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 Ammo = 3;
 
 private:
 	// Sets default values for this component's properties
@@ -68,7 +68,7 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 6000;
+	float LaunchSpeed = 8000;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
