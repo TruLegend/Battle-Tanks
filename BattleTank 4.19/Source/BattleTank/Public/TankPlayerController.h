@@ -34,14 +34,14 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float CrossHairLocationX = 0.5;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float CrossHairLocationY = 0.33333;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float LineTraceRange = 1000000.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 6000;
+		float LaunchSpeed = 10000;
 };
