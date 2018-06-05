@@ -21,7 +21,6 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
 		if (!ensure(PossessedTank)) { return; }
 	
-		// TODO: Subscribe our local method to the tank's death event
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
 	}
 }
@@ -34,10 +33,12 @@ void ATankAIController::Tick(float DeltaTime)
 	auto ControlledTank = GetPawn();
 	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	if (!ensure(PlayerTank && ControlledTank)) { return; }
+	if (!(PlayerTank && ControlledTank)) { return; }
 
 	// Move towards player
 	MoveToActor(PlayerTank, AcceptanceRadius);
+
+	if (!PlayerTank) { return; }
 
 	// Aim towards the player
 	auto TankAimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
@@ -52,5 +53,10 @@ void ATankAIController::Tick(float DeltaTime)
 
 void ATankAIController::OnTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("AI Tank Died/De-possessed"));
+	if (!GetPawn())
+	{
+		return;
+	}
+
+	GetPawn()->DetachFromControllerPendingDestroy();
 }

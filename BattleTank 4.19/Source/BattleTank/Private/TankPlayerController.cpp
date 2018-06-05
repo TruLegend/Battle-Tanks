@@ -25,7 +25,6 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 		if (!ensure(PossessedTank)) { return; }
 
-		// TODO: Subscribe our local method to the tank's death event
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
 	}
 }
@@ -102,5 +101,10 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 
 void ATankPlayerController::OnTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Player Tank Died/De-possessed"));
+	if (!GetPawn())
+	{
+		return;
+	}
+
+	Super::StartSpectatingOnly();
 }
