@@ -28,11 +28,17 @@ private:
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 
+	// When the AI Controller posseses a tank, this method gets called
+	virtual void SetPawn(APawn* InPawn) override;
+
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
+
+	UFUNCTION()
+		void OnTankDeath();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		float CrossHairLocationX = 0.5;

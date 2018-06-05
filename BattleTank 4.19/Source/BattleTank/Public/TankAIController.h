@@ -4,6 +4,8 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
+class ATank;
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
@@ -15,11 +17,16 @@ protected:
 		float AcceptanceRadius = 10000; // 100m
 
 private:
-
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void BeginPlay() override;
+
+	// When the AI Controller posseses a tank, this method gets called
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 6000;
