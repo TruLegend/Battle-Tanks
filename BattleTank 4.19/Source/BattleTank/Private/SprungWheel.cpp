@@ -14,9 +14,9 @@ ASprungWheel::ASprungWheel()
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
 	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
 	
-	SetRootComponent(Wheel);
-	MassWheelConstraint->SetupAttachment(Wheel);
-	Mass->SetupAttachment(Wheel);
+	SetRootComponent(MassWheelConstraint);
+	Mass->SetupAttachment(MassWheelConstraint);
+	Wheel->SetupAttachment(MassWheelConstraint);
 }
 
 // Called when the game starts or when spawned
@@ -24,6 +24,14 @@ void ASprungWheel::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (!GetAttachParentActor())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NULL"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("NOT NULL"));
+	}
 }
 
 // Called every frame
