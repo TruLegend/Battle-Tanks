@@ -20,9 +20,12 @@ void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto Actor = GetWorld()->SpawnActor<AActor>(SpawnClass);
+	auto Actor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass, GetComponentTransform());
 	if (!Actor) { return; }
-	Actor->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
+
+	Actor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
+
+	UGameplayStatics::FinishSpawningActor(Actor, GetComponentTransform());
 }
 
 

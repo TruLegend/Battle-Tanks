@@ -12,10 +12,8 @@ ASprungWheel::ASprungWheel()
 
 	MassWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("MassWheelConstraint"));
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
 	
 	SetRootComponent(MassWheelConstraint);
-	Mass->SetupAttachment(MassWheelConstraint);
 	Wheel->SetupAttachment(MassWheelConstraint);
 }
 
