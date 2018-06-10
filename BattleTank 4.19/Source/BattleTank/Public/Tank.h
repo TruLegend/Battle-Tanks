@@ -5,6 +5,13 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h" // Put new includes above this
 
+UENUM()
+enum class EHealthColour : uint8
+{
+	ALLY,
+	ENEMY
+};
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -20,6 +27,9 @@ public:
 	float GetHealthPercent() const;
 
 	FTankDelegate OnDeath;
+
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EHealthColour HealthColour = EHealthColour::ALLY;
 
 private:
 	// Sets default values for this pawn's properties

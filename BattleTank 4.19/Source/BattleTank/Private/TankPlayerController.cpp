@@ -30,6 +30,7 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 		if (!ensure(PossessedTank)) { return; }
 
+		PossessedTank->HealthColour = EHealthColour::ALLY;
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
 	}
 }
