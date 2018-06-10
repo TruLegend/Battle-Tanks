@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/PlayerController.h"
+#include "TankAIController.h"
 #include "TankPlayerController.generated.h" // Must be the last include
 
 // Forward Declaration
@@ -15,6 +16,10 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION(BlueprintPure, Category = "Player")
+		int32 GetPlayerTanks() const;
 
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
@@ -50,4 +55,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 10000;
+
+	UPROPERTY(VisibleAnywhere, Category = "Player")
+		int32 PlayerTanks = 0;
 };

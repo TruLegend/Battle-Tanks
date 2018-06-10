@@ -18,6 +18,8 @@ void ATankPlayerController::BeginPlay()
 
 	if (!ensure(AimingComponent)) { return; }
 	FoundAimingComponent(AimingComponent);
+
+	PlayerTanks++;
 }
 
 void ATankPlayerController::SetPawn(APawn* InPawn)
@@ -105,6 +107,11 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 	return true;
 }
 
+int32 ATankPlayerController::GetPlayerTanks() const
+{
+	return PlayerTanks;
+}
+
 void ATankPlayerController::OnTankDeath()
 {
 	if (!GetPawn())
@@ -112,5 +119,6 @@ void ATankPlayerController::OnTankDeath()
 		return;
 	}
 
+	PlayerTanks--;
 	Super::StartSpectatingOnly();
 }

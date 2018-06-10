@@ -20,7 +20,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
 		auto PossessedTank = Cast<ATank>(InPawn);
 
 		if (!PossessedTank) { return; }
-	
+
 		PossessedTank->HealthColour = EHealthColour::ENEMY;
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
 	}

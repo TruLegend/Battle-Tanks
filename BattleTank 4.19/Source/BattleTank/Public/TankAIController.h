@@ -4,17 +4,17 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
-
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
+public:
+
 protected:
 	// How close can the AI tank get in cm
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-		float AcceptanceRadius = 10000; // 100m
+	float AcceptanceRadius = 10000; // 100m
 
 private:
 	// Called every frame
@@ -30,4 +30,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 6000;
+
+	UPROPERTY(VisibleAnywhere, Category = "Player")
+		int32 AITanks = 0;
 };
